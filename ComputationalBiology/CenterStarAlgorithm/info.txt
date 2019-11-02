@@ -1,0 +1,7 @@
+The sum-of-pairs (SP) is a common. scoring scheme. Here, each column in an alignment is scored
+by summing the scores of all pairs. of symbols in that column.
+The score of the entire alignment is then summed over all column.
+
+Useful links:
+[1]: https://www.cs.tau.ac.il/~rshamir/algmb/98/scribe/html/lec05/node3.html
+[2]: https://www.cs.princeton.edu/~mona/Lecture/msa1.pdf
