@@ -8,6 +8,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1T46iIaLCR2VxLpiicdY4iUisvd" />
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -37,7 +44,7 @@
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="CenterStarAlgorithm" />
-      <option name="PROGRAM_PARAMETERS" value="1 0 0 FASTA/FASTA0.txt" />
+      <option name="PROGRAM_PARAMETERS" value="1 -1 -2 1 1 1 FASTA/FASTA2.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -61,11 +68,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/GlobalSequenceAlignment.java</url>
-          <line>193</line>
+          <line>197</line>
           <properties class="GlobalSequenceAlignment" method="stringAlignment">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="6" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

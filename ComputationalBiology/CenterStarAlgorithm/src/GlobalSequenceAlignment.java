@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * IMPORTANT: [delta(insertion/deletion) or (indel) value must be negative]
+ * IMPORTANT: [delta(insertion/deletion) or (indel) value must zero be negative]
  * This class is used to align two input string 'S' and 'T' by generating scoring-matrix 'V',
  * and by using matrix 'V' scores two strings will be aligned.
  * OUTPUT [1]: Printed scoring-matrix 'V' as table.
@@ -21,6 +21,10 @@ public class GlobalSequenceAlignment
     // ------------------------------------------------------------- //
     private String s = null;
     private String t = null;
+
+    private String modified_S1 = "";
+    private String modified_S2 = "";
+    private int alignmentScore = 0;
 
     private int matchScore;
     private int missScore;
@@ -214,7 +218,27 @@ public class GlobalSequenceAlignment
                 ancestorScore = V[i][j];
             }
             else
-            {
+            {   /*
+                // Bug fix for the Center Star Alignment Algorithm
+                // ---------------------------------------------------------------------------------------------- //
+                // fixing bug, when we try to match two '-' characters from S1 and S2,
+                // sometimes it happens so the end of one of the strings can have
+                // its last character '-' and other string can have '-' character somewhere in its sequence,
+                // such combination can lead to such problem when we cannot decrement 'i' or 'j'.
+                // We need this bug fix only for the 'Center Star Alignment' because often
+                // first string will be modified by 'Global Alignment Algorithm',
+                // and it make have gaps ('-') in its sequence.
+                if (i == 0)
+                {
+                    i = 1;
+                }
+                if (j == 0)
+                {
+                    j = 1;
+                }
+                // ---------------------------------------------------------------------------------------------- //
+                */
+
                 matchVal = V[i - 1][j - 1] + matchScore;
                 ancestorScore = V[i - 1][j - 1];
             }
@@ -505,7 +529,7 @@ public class GlobalSequenceAlignment
         {
             if (i != (T.length - 1) )
             {
-                tmpS += T[i] + "  ";
+                tmpS += T[i] + "   ";
             }
             else
             {
@@ -519,8 +543,22 @@ public class GlobalSequenceAlignment
         {
             for (int j = 0; j < V[i].length; j++)
             {
+                String n = "";
+                int abs = Math.abs(V[i][j]);
+                if (j > 0 && abs < 10)
+                {
+                    n = String.format(" %+d", V[i][j]);
+                }
+                else
+                {
+                    n = String.format("%+d", V[i][j]);
+                }
+                tmpN += " " + n;
+
+                /*
                 String n = String.format("%+d", V[i][j]);
                 tmpN += " " + n;
+                */
             }
             tmpT += S[i] + " " + tmpN + "\n";
             tmpN = "";
@@ -530,5 +568,32 @@ public class GlobalSequenceAlignment
         // Printing table
         System.out.printf("%s\n", tmpS);
         System.out.printf("%s", tmpT);
+    }
+
+    public void generatePairedAlignment()
+    {
+        for (Map.Entry<Integer, DSTR> entry : map_of_dstr.entrySet())
+        {
+            modified_S1 += entry.getValue().getS();
+            modified_S2 += entry.getValue().getT();
+            alignmentScore+= entry.getValue().getAlignmentScore();
+        }
+    }
+
+    public String getModified_S1()
+    {
+        return modified_S1;
+    }
+
+    public String getModified_S2()
+    {
+        return modified_S2;
+    }
+
+    public MPAD getMPAD(int alpha, int beta, int theta)
+    {
+        MPAD mpad = new MPAD(s, t, modified_S1, modified_S2, alignmentScore, alpha, beta, theta);
+
+        return mpad;
     }
 }
