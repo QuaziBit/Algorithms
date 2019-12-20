@@ -1,5 +1,5 @@
 1: How to run application
-   a: In terminal type: java -jar Zalgorithm.jar X Y Z FASTA.txt
+   a: In terminal type: java -jar GlobalSequenceAlignment.jar X Y Z FASTA.txt
       X: delta(match) 
 	  Y: delta(mismatch) 
 	  Z: delta(insertion/deletion) <MUST BE NEGATIV INTEGER>
